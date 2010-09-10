@@ -8,7 +8,7 @@
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	11.2.0.1.0
-Release:	1
+Release:	2
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 Source0:	instantclient-basic-linux32-%{x86ver}.zip
@@ -186,6 +186,9 @@ install -p sdk/ottclasses.zip $RPM_BUILD_ROOT%{_javadir}
 install -p sdk/ott $RPM_BUILD_ROOT%{_bindir}
 install -p sdk/include/* $RPM_BUILD_ROOT%{_includedir}/oracle/client
 install -p sdk/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+
+# rename to avoid clash with openldap header or php build will suffer
+mv $RPM_BUILD_ROOT%{_includedir}/oracle/client/{ldap.h,oraldap.h}
 
 cd $RPM_BUILD_ROOT%{_libdir}
 for ff in lib*.so.* ; do
