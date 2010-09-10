@@ -8,7 +8,7 @@
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	11.2.0.1.0
-Release:	0.9
+Release:	1
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 Source0:	instantclient-basic-linux32-%{x86ver}.zip
