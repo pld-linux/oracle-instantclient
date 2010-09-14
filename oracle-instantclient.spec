@@ -187,7 +187,7 @@ install -p sdk/ott $RPM_BUILD_ROOT%{_bindir}
 install -p sdk/include/* $RPM_BUILD_ROOT%{_includedir}/oracle/client
 install -p sdk/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
-cat <<EOF >/etc/tnsnames.ora
+cat <<EOF >$RPM_BUILD_ROOT/etc/tnsnames.ora
 ORCL =
   (DESCRIPTION =
       (ADDRESS_LIST =
