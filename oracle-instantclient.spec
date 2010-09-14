@@ -187,6 +187,21 @@ install -p sdk/ott $RPM_BUILD_ROOT%{_bindir}
 install -p sdk/include/* $RPM_BUILD_ROOT%{_includedir}/oracle/client
 install -p sdk/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
+cat <<EOF >/etc/tnsnames.ora
+ORCL =
+  (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS =
+	  (PROTOCOL = TCP)
+	  (Host = localhost)
+	  (Port = 1521)
+	)
+      )
+      (CONNECT_DATA = (SID = ORCL)
+      )
+  )
+EOF
+
 # rename to avoid clash with openldap header or php build will suffer
 mv $RPM_BUILD_ROOT%{_includedir}/oracle/client/{ldap.h,oraldap.h}
 
@@ -229,6 +244,7 @@ EOF
 %files basiclite
 %defattr(644,root,root,755)
 %doc instantclient_*/BASIC_LITE_README
+%config(noreplace) %verify(not md5 mtime size) /etc/tnsnames.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_libdir}/libclntsh.so.*
@@ -240,6 +256,7 @@ EOF
 %files basic
 %defattr(644,root,root,755)
 %doc instantclient_*/BASIC_README
+%config(noreplace) %verify(not md5 mtime size) /etc/tnsnames.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_libdir}/libclntsh.so.*
