@@ -1,0 +1,7 @@
+--- oracle-instantclient-11.2.0.2.0/instantclient_11_2/precomp/admin/pcscfg.cfg~	2010-09-05 06:48:16.000000000 +0200
++++ oracle-instantclient-11.2.0.2.0/instantclient_11_2/precomp/admin/pcscfg.cfg	2011-07-06 12:27:22.913334260 +0200
+@@ -1,3 +1,3 @@
+-sys_include=($ORACLE_HOME/sdk/include,/usr/include,/usr/lib/gcc-lib/x86_64-redhat-linux/3.2.3/include,/usr/lib/gcc/x86_64-redhat-linux/4.1.1/include,/usr/lib64/gcc/x86_64-suse-linux/4.1.2/include,/usr/lib64/gcc/x86_64-suse-linux/4.3/include)
++sys_include=(/usr/include/orcale/client,$ORACLE_HOME/sdk/include,/usr/include,@@GCC_SYS_INC_DIR@@)
+ ltype=short
+ define=__x86_64__
