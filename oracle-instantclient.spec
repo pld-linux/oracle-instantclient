@@ -62,12 +62,12 @@ NoSource:	16
 NoSource:	17
 %endif
 # http://duberga.net/dbd_oracle_instantclient_linux/oracle-instantclient-config
-Source20:	oracle-instantclient-config.in
-Source21:	oracle-instantclient.pc.in
+Source20:	%{name}-config.in
+Source21:	%{name}.pc.in
+Source22:	tnsnames.ora
 Patch0:		proc-includes32.patch
 Patch1:		proc-includes64.patch
 URL:		http://www.oracle.com/technetwork/database/features/instant-client/
-BuildRequires:	sed
 BuildRequires:	unzip
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -97,6 +97,7 @@ Provides:	%{name} = %{version}-%{release}
 
 %description basic
 Orcale Database Instant Client Package - Basic.
+
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
 %package basiclite
@@ -106,6 +107,7 @@ Provides:	%{name} = %{version}-%{release}
 
 %description basiclite
 Orcale Database Instant Client Package - Basic Lite.
+
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
 This package contains only English error messages and Unicode, ASCII,
@@ -118,8 +120,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Oracle Database Instant Client Package - SDK.
-Additional header files and an example makefile for developing
-Oracle applications with Instant Client.
+
+Additional header files and an example makefile for developing Oracle
+applications with Instant Client.
 
 %package jdbc
 Summary:	JDBC for Oracle Database Instant Client
@@ -128,8 +131,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description jdbc
 Oracle Database Instant Client Package - JDBC.
-Support for JDBC-OCI, XA, Internationalization, and RowSet
-operations under JDBC.
+
+Support for JDBC-OCI, XA, Internationalization, and RowSet operations
+under JDBC.
 
 %package jdbc-devel
 Summary:	JDBC for Oracle Database Instant Client development files
@@ -148,6 +152,7 @@ Requires:	unixODBC
 
 %description odbc
 Oracle Database Instant Client Package - ODBC.
+
 Additional libraries for enabling ODBC applications.
 
 %package sqlplus
@@ -157,8 +162,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description sqlplus
 Oracle Database Instant Client Package - SQL*Plus.
-Additional libraries and executable for running SQL*Plus
-with Instant Client.
+
+Additional libraries and executable for running SQL*Plus with Instant
+Client.
 
 %package tools
 Summary:	Oracle Database Workload Replay Client
@@ -167,8 +173,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description tools
 Oracle Database Instant Client Package - WRC.
-Workload Replay Client used to replay workload
-for RAT's DB Replay Feature.
+
+Workload Replay Client used to replay workload for RAT's DB Replay
+Feature.
 
 %package precomp
 Summary:	Oracle Database Client - Precompiler
@@ -177,8 +184,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description precomp
 Oracle Database Instant Client Package - Precompiler.
-Additional files for "proc" binary and related files
-to precompile a Pro*C application and demo.
+
+Additional files for "proc" binary and related files to precompile a
+Pro*C application and demo.
 
 %prep
 %ifarch %{ix86}
@@ -195,7 +203,7 @@ mv instantclient_*/* .
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/sqlplus/admin} \
 	$RPM_BUILD_ROOT{%{_examplesdir}/%{name},%{_includedir}/oracle/client} \
-	$RPM_BUILD_ROOT{%{_pkgconfigdir},%{_javadir},/etc}
+	$RPM_BUILD_ROOT{%{_pkgconfigdir},%{_javadir},%{_sysconfdir}}
 
 cp -p *.jar $RPM_BUILD_ROOT%{_javadir}
 cp -a *.so* $RPM_BUILD_ROOT%{_libdir}
@@ -231,20 +239,7 @@ cp -a precomp $RPM_BUILD_ROOT%{_libdir}
 %{__sed} -i -e "s|@GCC_SYS_INC_DIR@|%{_gcc_sys_inc_dir}|g" \
 	$RPM_BUILD_ROOT%{_libdir}/precomp/admin/pcscfg.cfg
 
-cat <<EOF >$RPM_BUILD_ROOT/etc/tnsnames.ora
-ORCL =
-  (DESCRIPTION =
-      (ADDRESS_LIST =
-        (ADDRESS =
-	  (PROTOCOL = TCP)
-	  (Host = localhost)
-	  (Port = 1521)
-	)
-      )
-      (CONNECT_DATA = (SID = ORCL)
-      )
-  )
-EOF
+cp -p %{SOURCE22} $RPM_BUILD_ROOT%{_sysconfdir}/tnsnames.ora
 
 # rename to avoid clash with openldap header or php build will suffer
 mv $RPM_BUILD_ROOT%{_includedir}/oracle/client/{ldap.h,oraldap.h}
@@ -276,7 +271,7 @@ rm -rf $RPM_BUILD_ROOT
 [%{driver_name}]
 Description = %{driver_desc}
 Driver = %{_libdir}/libsqora.so.%{soname}
-Setup = 
+Setup =
 EOF
 
 %preun odbc
@@ -297,7 +292,7 @@ EOF
 %endif
 
 # common to basic/basiclite
-%config(noreplace) %verify(not md5 mtime size) /etc/tnsnames.ora
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tnsnames.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_bindir}/uidrvci

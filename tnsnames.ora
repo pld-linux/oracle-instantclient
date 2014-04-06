@@ -1,0 +1,12 @@
+ORCL =
+  (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS =
+	  (PROTOCOL = TCP)
+	  (Host = localhost)
+	  (Port = 1521)
+	)
+      )
+      (CONNECT_DATA = (SID = ORCL)
+      )
+  )
