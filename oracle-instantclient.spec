@@ -90,6 +90,7 @@ Orcale Database Instant Client Package.
 Summary:	Oracle Database Instant Client - Basic
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
+Conflicts:	%{name} < 12.1.0.1.0-0.4
 
 %description basic
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
@@ -98,6 +99,7 @@ All files required to run OCI, and OCCI, and JDBC-OCI applications.
 Summary:	Oracle Database Instant Client - Basic Lite
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
+Conflicts:	%{name} < 12.1.0.1.0-0.4
 
 %description basiclite
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
