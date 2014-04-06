@@ -2,7 +2,7 @@
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	12.1.0.1.0
-Release:	0.4
+Release:	0.5
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
@@ -281,27 +281,27 @@ EOF
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_bindir}/uidrvci
+# libnnz.so: Security library
 %attr(755,root,root) %{_libdir}/libnnz%{driver_ver}.so
 %attr(755,root,root) %{_libdir}/libons.so
-# Client Code Library
+# libclntsh.so, libclntshcore.so: Client Code Library and data shared library.
 %attr(755,root,root) %{_libdir}/libclntsh.so.*
 %attr(755,root,root) %{_libdir}/libclntshcore.so.%{soname}
 
 # subpackage these (not directly needed by php-ext):
 %attr(755,root,root) %{_libdir}/libocci.so.*
 %attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
-%attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
 
 %files basiclite
 %defattr(644,root,root,755)
 %doc BASIC_LITE_README
-# Instant Client Light (English) shared library, libociicus.so
+# libociicus.so: OCI Instant Client data shared library (English only)
 %attr(755,root,root) %{_libdir}/libociicus.so
 
 %files basic
 %defattr(644,root,root,755)
 %doc BASIC_README
-# OCI Instant Client Data Shared Library, libociei.so
+# libociei.so: OCI Instant Client data shared library
 %attr(755,root,root) %{_libdir}/libociei.so
 
 %files devel
@@ -331,6 +331,8 @@ EOF
 %defattr(644,root,root,755)
 %doc JDBC_README
 %attr(755,root,root) %{_libdir}/libheteroxa%{driver_ver}.so
+# libocijdbc12.so: OCI Instant Client JDBC Library
+%attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
 %{_javadir}/*.jar
 
 %files jdbc-devel
@@ -350,7 +352,9 @@ EOF
 %defattr(644,root,root,755)
 %doc SQLPLUS_README
 %attr(755,root,root) %{_bindir}/sqlplus
+# libsqlplus.so: SQL*Plus library
 %attr(755,root,root) %{_libdir}/libsqlplus.so
+# libsqlplusic.so: SQL*Plus data shared library
 %attr(755,root,root) %{_libdir}/libsqlplusic.so
 %dir %{_datadir}/sqlplus
 %dir %{_datadir}/sqlplus/admin
