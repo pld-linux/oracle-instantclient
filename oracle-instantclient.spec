@@ -64,7 +64,8 @@ NoSource:	17
 # http://duberga.net/dbd_oracle_instantclient_linux/oracle-instantclient-config
 Source20:	oracle-instantclient-config.in
 Source21:	oracle-instantclient.pc.in
-Patch0:		%{name}-proc-includes.patch
+Patch0:		proc-includes32.patch
+Patch1:		proc-includes64.patch
 URL:		http://www.oracle.com/technetwork/database/features/instant-client/
 BuildRequires:	sed
 BuildRequires:	unzip
@@ -182,13 +183,13 @@ to precompile a Pro*C application and demo.
 %prep
 %ifarch %{ix86}
 %setup -qcT -b %{?with_lite:1}%{!?with_lite:0} -b 2 -b 3 -b 4 -b 5 -b 6 -b 7
+%patch0 -p1
 %endif
 %ifarch %{x8664}
 %setup -qcT -b %{?with_lite:11}%{!?with_lite:10} -b 12 -b 13 -b 14 -b 15 -b 16 -b 17
+%patch1 -p1
 %endif
 mv instantclient_*/* .
-
-%patch0 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
