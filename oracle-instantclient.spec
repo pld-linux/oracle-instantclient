@@ -289,7 +289,11 @@ EOF
 %attr(755,root,root) %{_libdir}/libclntshcore.so.%{soname}
 
 # subpackage these (not directly needed by php-ext):
+# libocci.so: OCCI (Oracle C++ Call Interface) Library
 %attr(755,root,root) %{_libdir}/libocci.so.*
+
+# liboramysql.so: MySQL Client Library Driver for Oracle Database,
+# drop-in replacement for MySQL Commercial Connector/C 6.0 client library.
 %attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
 
 %files basiclite
