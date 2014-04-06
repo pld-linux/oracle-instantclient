@@ -6,7 +6,7 @@
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	12.1.0.1.0
-Release:	0.1
+Release:	0.2
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
@@ -199,6 +199,9 @@ Pro*C application and demo.
 %endif
 mv instantclient_*/* .
 
+mv help/us help_us
+mv help/ja help_ja
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/sqlplus/admin} \
@@ -290,8 +293,7 @@ EOF
 %doc BASIC_README
 %attr(755,root,root) %{_libdir}/libociei.so
 %endif
-
-# common to basic/basiclite
+# files common to basic/basiclite
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tnsnames.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
@@ -302,7 +304,7 @@ EOF
 %attr(755,root,root) %{_libdir}/libclntsh.so.*
 %attr(755,root,root) %{_libdir}/libclntshcore.so.%{soname}
 %attr(755,root,root) %{_libdir}/libons.so
-%attr(755,root,root) %{_libdir}/liboramysql12.so
+%attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
 
 %files devel
 %defattr(644,root,root,755)
@@ -339,8 +341,12 @@ EOF
 
 %files odbc
 %defattr(644,root,root,755)
-%doc ODBC*.htm*
-%attr(755,root,root) %{_libdir}/libsqora.so*
+%doc ODBC*.html ODBCRelnotesUS.htm
+%doc %lang(ja) ODBCRelnotesJA.htm
+%doc help_us
+%doc %lang(ja) help_ja
+%attr(755,root,root) %{_libdir}/libsqora.so.%{soname}
+%attr(755,root,root) %{_libdir}/libsqora.so
 
 %files sqlplus
 %defattr(644,root,root,755)
@@ -348,7 +354,9 @@ EOF
 %attr(755,root,root) %{_bindir}/sqlplus
 %attr(755,root,root) %{_libdir}/libsqlplus.so
 %attr(755,root,root) %{_libdir}/libsqlplusic.so
-%{_datadir}/sqlplus
+%dir %{_datadir}/sqlplus
+%dir %{_datadir}/sqlplus/admin
+%{_datadir}/sqlplus/admin/glogin.sql
 
 %files tools
 %defattr(644,root,root,755)
@@ -358,10 +366,14 @@ EOF
 %files precomp
 %defattr(644,root,root,755)
 %doc PRECOMP_README
-%attr(755,root,root) %{_bindir}/proc*
+%attr(755,root,root) %{_bindir}/proc
+%attr(755,root,root) %{_bindir}/procob
 %attr(755,root,root) %{_bindir}/rtsora
 %{_libdir}/cobsqlintf.o
-%{_libdir}/precomp
+%dir %{_libdir}/precomp
+%dir %{_libdir}/precomp/admin
+%{_libdir}/precomp/admin/pcscfg.cfg
+%{_libdir}/precomp/admin/pcbcfg.cfg
 %{_examplesdir}/%{name}/demo_proc*_ic.mk
 %{_examplesdir}/%{name}/*.pc*
 
