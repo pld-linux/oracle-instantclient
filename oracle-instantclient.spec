@@ -1,12 +1,8 @@
-#
-# Conditional build:
-%bcond_with	lite		# build basic lite version of client
-
 %define		otnurl	http://download.oracle.com/otn/linux/instantclient/121010
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	12.1.0.1.0
-Release:	0.2
+Release:	0.4
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
@@ -93,25 +89,21 @@ Orcale Database Instant Client Package.
 %package basic
 Summary:	Oracle Database Instant Client - Basic
 Group:		Applications/Databases
-Provides:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description basic
-Orcale Database Instant Client Package - Basic.
-
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
 %package basiclite
 Summary:	Oracle Database Instant Client - Basic Lite
 Group:		Applications/Databases
-Provides:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description basiclite
-Orcale Database Instant Client Package - Basic Lite.
-
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
 This package contains only English error messages and Unicode, ASCII,
-and Western European character set suppor
+and Western European character set support
 
 %package devel
 Summary:	SDK for Oracle Database Instant Client
@@ -119,8 +111,6 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Oracle Database Instant Client Package - SDK.
-
 Additional header files and an example makefile for developing Oracle
 applications with Instant Client.
 
@@ -189,12 +179,13 @@ Additional files for "proc" binary and related files to precompile a
 Pro*C application and demo.
 
 %prep
+%define	__unzip unzip -n
 %ifarch %{ix86}
-%setup -qcT -b %{?with_lite:1}%{!?with_lite:0} -b 2 -b 3 -b 4 -b 5 -b 6 -b 7
+%setup -qcT -b 0 -b 1 -b 2 -b 3 -b 4 -b 5 -b 6 -b 7
 %patch0 -p1
 %endif
 %ifarch %{x8664}
-%setup -qcT -b %{?with_lite:11}%{!?with_lite:10} -b 12 -b 13 -b 14 -b 15 -b 16 -b 17
+%setup -qcT -b 10 -b 11 -b 12 -b 13 -b 14 -b 15 -b 16 -b 17
 %patch1 -p1
 %endif
 mv instantclient_*/* .
@@ -282,29 +273,34 @@ EOF
 
 %postun odbc -p /sbin/ldconfig
 
-%if %{with lite}
-%files basiclite
+%files
 %defattr(644,root,root,755)
-%doc BASIC_LITE_README
-%attr(755,root,root) %{_libdir}/libociicus.so
-%else
-%files basic
-%defattr(644,root,root,755)
-%doc BASIC_README
-%attr(755,root,root) %{_libdir}/libociei.so
-%endif
-# files common to basic/basiclite
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tnsnames.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_bindir}/uidrvci
-%attr(755,root,root) %{_libdir}/libocci.so.*
-%attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
 %attr(755,root,root) %{_libdir}/libnnz%{driver_ver}.so
+%attr(755,root,root) %{_libdir}/libons.so
+# Client Code Library
 %attr(755,root,root) %{_libdir}/libclntsh.so.*
 %attr(755,root,root) %{_libdir}/libclntshcore.so.%{soname}
-%attr(755,root,root) %{_libdir}/libons.so
+
+# subpackage these (not directly needed by php-ext):
+%attr(755,root,root) %{_libdir}/libocci.so.*
 %attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
+%attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
+
+%files basiclite
+%defattr(644,root,root,755)
+%doc BASIC_LITE_README
+# Instant Client Light (English) shared library, libociicus.so
+%attr(755,root,root) %{_libdir}/libociicus.so
+
+%files basic
+%defattr(644,root,root,755)
+%doc BASIC_README
+# OCI Instant Client Data Shared Library, libociei.so
+%attr(755,root,root) %{_libdir}/libociei.so
 
 %files devel
 %defattr(644,root,root,755)
