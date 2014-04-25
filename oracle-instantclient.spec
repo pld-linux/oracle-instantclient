@@ -84,7 +84,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreq		^libcob.*.so
 
 %description
-Orcale Database Instant Client Package.
+Oracle Database Instant Client Package.
 
 %package basic
 Summary:	Oracle Database Instant Client - Basic
@@ -264,7 +264,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post odbc
 /sbin/ldconfig
-# install Orcale driver
+# install Oracle driver
 /usr/bin/odbcinst -i -d -r <<EOF
 [%{driver_name}]
 Description = %{driver_desc}
