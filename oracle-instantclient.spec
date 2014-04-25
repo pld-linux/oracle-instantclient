@@ -2,7 +2,7 @@
 Summary:	Oracle Database Instant Client
 Name:		oracle-instantclient
 Version:	12.1.0.1.0
-Release:	0.5
+Release:	0.6
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
@@ -116,23 +116,25 @@ Requires:	%{name} = %{version}-%{release}
 Additional header files and an example makefile for developing Oracle
 applications with Instant Client.
 
-%package jdbc
+%package -n java-jdbc-%{name}
 Summary:	JDBC for Oracle Database Instant Client
 Group:		Libraries/Java
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	oracle-instantclient-jdbc < 12.1.0.1.0-0.6
 
-%description jdbc
+%description -n java-jdbc-%{name}
 Oracle Database Instant Client Package - JDBC.
 
 Support for JDBC-OCI, XA, Internationalization, and RowSet operations
 under JDBC.
 
-%package jdbc-devel
+%package -n java-jdbc-%{name}-devel
 Summary:	JDBC for Oracle Database Instant Client development files
 Group:		Development/Languages/Java
-Requires:	%{name}-jdbc = %{version}-%{release}
+Requires:	java-jdbc-%{name} = %{version}-%{release}
+Obsoletes:	oracle-instantclient-jdbc-devel < 12.1.0.1.0-0.6
 
-%description jdbc-devel
+%description -n java-jdbc-%{name}-devel
 Oracle Database Instant Client Package - JDBC development files.
 
 %package odbc
@@ -254,8 +256,8 @@ rm -rf $RPM_BUILD_ROOT
 %post	basiclite -p /sbin/ldconfig
 %postun	basiclite -p /sbin/ldconfig
 
-%post	jdbc -p /sbin/ldconfig
-%postun	jdbc -p /sbin/ldconfig
+%post	-n java-jdbc-%{name} -p /sbin/ldconfig
+%postun	-n java-jdbc-%{name} -p /sbin/ldconfig
 
 %post	sqlplus -p /sbin/ldconfig
 %postun	sqlplus -p /sbin/ldconfig
@@ -331,17 +333,21 @@ EOF
 %exclude %{_examplesdir}/%{name}/demo_proc*_ic.mk
 %exclude %{_examplesdir}/%{name}/*.pc*
 
-%files jdbc
+%files -n java-jdbc-%{name}
 %defattr(644,root,root,755)
 %doc JDBC_README
 %attr(755,root,root) %{_libdir}/libheteroxa%{driver_ver}.so
 # libocijdbc12.so: OCI Instant Client JDBC Library
 %attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
-%{_javadir}/*.jar
+%{_javadir}/ojdbc6.jar
+%{_javadir}/ojdbc7.jar
+%{_javadir}/orai18n-mapping.jar
+%{_javadir}/orai18n.jar
+%{_javadir}/xstreams.jar
 
-%files jdbc-devel
+%files -n java-jdbc-%{name}-devel
 %defattr(644,root,root,755)
-%{_javadir}/*.zip
+%{_javadir}/ottclasses.zip
 
 %files odbc
 %defattr(644,root,root,755)
