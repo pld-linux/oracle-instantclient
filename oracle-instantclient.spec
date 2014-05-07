@@ -1,5 +1,14 @@
+# download requires session cookie; for manual download use:
+# http://www.oracle.com/technetwork/topics/linuxsoft-082809.html (ix86)
+# http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html (x86_64)
+# http://www.oracle.com/technetwork/topics/zlinuxsoft-096525.html (s390/s390x)
+# http://www.oracle.com/technetwork/topics/linuxitaniumsoft-087585.html (ia64 - v10.2.0.4)
+# http://www.oracle.com/technetwork/topics/linuxpower-101193.html (ppc - v10.2.0.5)
+# http://www.oracle.com/technetwork/topics/linuxpower64-092516.html (ppc64 - v10.2.0.5)
+# 
 %define		otnurl	http://download.oracle.com/otn/linux/instantclient/121010
 Summary:	Oracle Database Instant Client
+Summary(pl.UTF-8):	Oracle Database Instant Client - klient bazy danych Oracle
 Name:		oracle-instantclient
 Version:	12.1.0.1.0
 Release:	1
@@ -89,29 +98,46 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Oracle Database Instant Client Package.
 
+%description -l pl.UTF-8
+Pakiet Oracle Database Instant Client - klient bazy danych Oracle.
+
 %package basic
 Summary:	Oracle Database Instant Client - Basic
+Summary(pl.UTF-8):	Oracle Database Instant Client - wersja Basic
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
-Conflicts:	%{name} < 12.1.0.1.0-0.4
+Conflicts:	oracle-instantclient < 12.1.0.1.0-0.4
 
 %description basic
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
+%description basic -l pl.UTF-8
+Wszystkie pliki wymagane do uruchamiania aplikacji OCI, OCCI oraz
+JDBC-OCI.
+
 %package basiclite
 Summary:	Oracle Database Instant Client - Basic Lite
+Summary(pl.UTF-8):	Oracle Database Instant Client - wersja Basic Lite
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
-Conflicts:	%{name} < 12.1.0.1.0-0.4
+Conflicts:	oracle-instantclient < 12.1.0.1.0-0.4
 
 %description basiclite
 All files required to run OCI, and OCCI, and JDBC-OCI applications.
 
 This package contains only English error messages and Unicode, ASCII,
-and Western European character set support
+and Western European character set support.
+
+%description basiclite -l pl.UTF-8
+Wszystkie pliki wymagane do uruchamiania aplikacji OCI, OCCI oraz
+JDBC-OCI.
+
+Ten pakiet zawiera wyłącznie komunikaty błędów po angielsku oraz
+obsługę zestawów znaków Unicode, ASCII oraz zachodnioeuropejskiego.
 
 %package devel
 Summary:	SDK for Oracle Database Instant Client
+Summary(pl.UTF-8):	SDK dla bibliotek Oracle Database Instant Client
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -119,8 +145,13 @@ Requires:	%{name} = %{version}-%{release}
 Additional header files and an example makefile for developing Oracle
 applications with Instant Client.
 
+%description devel -l pl.UTF-8
+Dodatkowe pliki nagłówkowe oraz przykładowy plik makefile do tworzenia
+aplikacji Oracle przy użyciu Instant Clienta.
+
 %package -n java-jdbc-%{name}
 Summary:	JDBC for Oracle Database Instant Client
+Summary(pl.UTF-8):	Biblioteka JDBC dla Oracle Database Instant Clienta
 Group:		Libraries/Java
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	oracle-instantclient-jdbc < 12.1.0.1.0-0.6
@@ -131,8 +162,14 @@ Oracle Database Instant Client Package - JDBC.
 Support for JDBC-OCI, XA, Internationalization, and RowSet operations
 under JDBC.
 
+%description -n java-jdbc-%{name} -l pl.UTF-8
+Pakiet Oracle Database Instant Client - biblioteka JDBC.
+
+Obsługa JDBC-OCI, XA, lokalizacji oraz operacji RowSet pod JDBC.
+
 %package -n java-jdbc-%{name}-devel
 Summary:	JDBC for Oracle Database Instant Client development files
+Summary(pl.UTF-8):	Pliki programistyczne JDBC dla Oracle Database Instant Clienta
 Group:		Development/Languages/Java
 Requires:	java-jdbc-%{name} = %{version}-%{release}
 Obsoletes:	oracle-instantclient-jdbc-devel < 12.1.0.1.0-0.6
@@ -140,8 +177,12 @@ Obsoletes:	oracle-instantclient-jdbc-devel < 12.1.0.1.0-0.6
 %description -n java-jdbc-%{name}-devel
 Oracle Database Instant Client Package - JDBC development files.
 
+%description -n java-jdbc-%{name}-devel -l pl.UTF-8
+Pakiet Oracle Database Instant Client - pliki programistyczne JDBC.
+
 %package odbc
 Summary:	ODBC for Oracle Database Instant Client
+Summary(pl.UTF-8):	Biblioteka ODBC dla Oracle Database Instant Clienta
 Group:		Libraries
 Requires(post,preun):	/usr/bin/odbcinst
 Requires:	%{name} = %{version}-%{release}
@@ -153,8 +194,14 @@ specifications. It is based on features of Oracle %{version} ODBC
 driver for Windows, without the need for a traditional ORACLE_HOME
 installation.
 
+%description odbc -l pl.UTF-8
+Oracle ODBC Instant Client dla Linuksa jest zgodny ze specyfikacją
+ODBC 3.52. Jest oparty na możliwościach sterownika ODBC dla Oracle
+%{version}, bez potrzeby tradycyjnej instalacji ORACLE_HOME.
+
 %package sqlplus
 Summary:	Oracle Database Client - SQL*Plus
+Summary(pl.UTF-8):	Klient bazy danych Oracla - SQL*Plus
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
 
@@ -164,8 +211,15 @@ Oracle Database Instant Client Package - SQL*Plus.
 Additional libraries and executable for running SQL*Plus with Instant
 Client.
 
+%description sqlplus -l pl.UTF-8
+Pakiet Oracle Database Instant Client - SQL*Plus.
+
+Dodatkowe biblioteki i program do uruchamiania SQL*Plus wraz z
+Instant Clientem.
+
 %package tools
 Summary:	Oracle Database Workload Replay Client
+Summary(pl.UTF-8):	Narzędzie Oracle Database Workload Replay Client
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
 
@@ -175,8 +229,15 @@ Oracle Database Instant Client Package - WRC.
 WRC - Workload Replay Client used to replay workload for RAT's DB
 Replay Feature.
 
+%description tools -l pl.UTF-8
+Pakiet Oracle Database Instant Client - WRC.
+
+WRC (Workload Replay Client) służy do odtwarzania danych dla RAT
+DB Replay.
+
 %package precomp
 Summary:	Oracle Database Client - Precompiler
+Summary(pl.UTF-8):	Prekompilator klienta bazy danych Oracle
 Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
 
@@ -187,6 +248,14 @@ PRECOMP Instant Client (IC) Package contains following components:
 - sample configuration files, demo programs and demo make files for
   building proc and procob demos and in general any Pro*C/Pro*COBOL
   application.
+
+%description precomp -l pl.UTF-8
+Pakiet PRECOMP Instant Client (IC) zawiera następujące komponenty:
+- program "proc" do prekompilacji aplikacji Pro*C
+- program "procob" do prekompilacji aplikacji Pro*COBOL
+- przykładowe pliki konfiguracyjne, programy demonstracyjne oraz
+  pliki makefile dla programów demonstracyjnych proc i procob, a
+  także dowolnych aplikacji Pro*C/Pro*COBOL
 
 %prep
 %define	__unzip unzip -n
