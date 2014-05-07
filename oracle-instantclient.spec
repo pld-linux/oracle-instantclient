@@ -66,6 +66,8 @@ Patch0:		proc-includes32.patch
 Patch1:		proc-includes64.patch
 URL:		http://www.oracle.com/technetwork/database/features/instant-client/
 BuildRequires:	unzip
+Suggests:	%{name}-basic
+Suggests:	%{name}-basiclite
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
