@@ -61,6 +61,7 @@ NoSource:	17
 Source20:	%{name}-config.in
 Source21:	%{name}.pc.in
 Source22:	tnsnames.ora
+Source23:	sqlnet.ora
 Patch0:		proc-includes32.patch
 Patch1:		proc-includes64.patch
 URL:		http://www.oracle.com/technetwork/database/features/instant-client/
@@ -241,6 +242,10 @@ cp -a precomp $RPM_BUILD_ROOT%{_libdir}
 	$RPM_BUILD_ROOT%{_libdir}/precomp/admin/pcscfg.cfg
 
 cp -p %{SOURCE22} $RPM_BUILD_ROOT%{_sysconfdir}/tnsnames.ora
+cp -p %{SOURCE23} $RPM_BUILD_ROOT%{_sysconfdir}/sqlnet.ora
+# make it load without ORACLE_HOME env
+install -d $RPM_BUILD_ROOT%{_libdir}/network/admin
+ln -s %{_sysconfdir}/sqlnet.ora $RPM_BUILD_ROOT%{_libdir}/network/admin/sqlnet.ora
 
 # rename to avoid clash with openldap header or php build will suffer
 mv $RPM_BUILD_ROOT%{_includedir}/oracle/client/{ldap.h,oraldap.h}
@@ -283,6 +288,7 @@ EOF
 %files
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tnsnames.ora
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/sqlnet.ora
 %attr(755,root,root) %{_bindir}/adrci
 %attr(755,root,root) %{_bindir}/genezi
 %attr(755,root,root) %{_bindir}/uidrvci
@@ -300,6 +306,11 @@ EOF
 # liboramysql.so: MySQL Client Library Driver for Oracle Database,
 # drop-in replacement for MySQL Commercial Connector/C 6.0 client library.
 %attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
+
+# parent dirs for sqlnet.ora
+%dir %{_libdir}/network
+%dir %{_libdir}/network/admin
+%config(noreplace) %verify(not md5 mtime size) %{_libdir}/network/admin/sqlnet.ora
 
 %files basiclite
 %defattr(644,root,root,755)

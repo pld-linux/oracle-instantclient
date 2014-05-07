@@ -1,0 +1,7 @@
+# http://archimedeseureka.blogspot.com/2011/08/disabling-logging-for-oracle-instant.html
+DIAG_ADR_ENABLED = OFF
+TRACE_LEVEL_CLIENT = OFF
+TRACE_DIRECTORY_CLIENT=/dev/null
+LOG_DIRECTORY_CLIENT = /dev/null
+LOG_FILE_CLIENT = /dev/null
+LOG_LEVEL_CLIENT = OFF
