@@ -145,9 +145,10 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	unixODBC
 
 %description odbc
-Oracle Database Instant Client Package - ODBC.
-
-Additional libraries for enabling ODBC applications.
+Oracle ODBC Instant Client for Linux complies with ODBC 3.52
+specifications. It is based on features of Oracle %{version} ODBC
+driver for Windows, without the need for a traditional ORACLE_HOME
+installation.
 
 %package sqlplus
 Summary:	Oracle Database Client - SQL*Plus
@@ -168,8 +169,8 @@ Requires:	%{name} = %{version}-%{release}
 %description tools
 Oracle Database Instant Client Package - WRC.
 
-Workload Replay Client used to replay workload for RAT's DB Replay
-Feature.
+WRC - Workload Replay Client used to replay workload for RAT's DB
+Replay Feature.
 
 %package precomp
 Summary:	Oracle Database Client - Precompiler
@@ -177,10 +178,12 @@ Group:		Applications/Databases
 Requires:	%{name} = %{version}-%{release}
 
 %description precomp
-Oracle Database Instant Client Package - Precompiler.
-
-Additional files for "proc" binary and related files to precompile a
-Pro*C application and demo.
+PRECOMP Instant Client (IC) Package contains following components:
+- "proc" binary to precompile a Pro*C application
+- "procob" binary to precompile a Pro*COBOL application
+- sample configuration files, demo programs and demo make files for
+  building proc and procob demos and in general any Pro*C/Pro*COBOL
+  application.
 
 %prep
 %define	__unzip unzip -n
