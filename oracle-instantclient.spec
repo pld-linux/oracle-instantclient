@@ -5,12 +5,12 @@
 # http://www.oracle.com/technetwork/topics/linuxitaniumsoft-087585.html (ia64 - v10.2.0.4)
 # http://www.oracle.com/technetwork/topics/linuxpower-101193.html (ppc - v10.2.0.5)
 # http://www.oracle.com/technetwork/topics/linuxpower64-092516.html (ppc64 - v10.2.0.5)
-# 
-%define		otnurl	http://download.oracle.com/otn/linux/instantclient/121010
+
+%define		otnurl	http://download.oracle.com/otn/linux/instantclient/121020
 Summary:	Oracle Database Instant Client
 Summary(pl.UTF-8):	Oracle Database Instant Client - klient bazy danych Oracle
 Name:		oracle-instantclient
-Version:	12.1.0.1.0
+Version:	12.1.0.2.0
 Release:	1
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
