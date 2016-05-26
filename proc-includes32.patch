@@ -1,6 +1,6 @@
---- oracle-instantclient-12.1.0.1.0/instantclient_12_1/precomp/admin/pcscfg.cfg~	2013-05-27 07:49:02.000000000 +0000
-+++ oracle-instantclient-12.1.0.1.0/instantclient_12_1/precomp/admin/pcscfg.cfg	2014-04-06 21:14:04.807265844 +0000
+--- oracle-instantclient-12.1.0.2.0/instantclient_12_1/precomp/admin/pcscfg.cfg~	2014-07-08 03:44:34.000000000 +0300
++++ oracle-instantclient-12.1.0.2.0/instantclient_12_1/precomp/admin/pcscfg.cfg	2016-05-26 17:34:43.221774438 +0300
 @@ -1,2 +1,2 @@
--sys_include=($ORACLE_HOME/sdk/include,/usr/include,/usr/lib/gcc/i386-redhat-linux/4.1.2/include,/usr/lib/gcc/i386-redhat-linux/3.4.6/include,/usr/lib/gcc/i586-suse-linux/4.3/include,/usr/lib/gcc/i586-suse-linux/4.1.2/include)
+-sys_include=($ORACLE_HOME/sdk/include,/usr/include,/usr/lib/gcc/i386-redhat-linux/4.1.2/include,/usr/lib/gcc/i686-redhat-linux/4.4.7/include,/usr/lib/gcc/i386-redhat-linux/3.4.6/include,/usr/lib/gcc/i586-suse-linux/4.3/include,/usr/lib/gcc/i586-suse-linux/4.1.2/include)
 +sys_include=(/usr/include/oracle/client,$ORACLE_HOME/sdk/include,/usr/include,@GCC_SYS_INC_DIR@)
  ltype=short

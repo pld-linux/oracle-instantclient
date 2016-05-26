@@ -16,21 +16,21 @@ License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
 Source0:	%{otnurl}/instantclient-basic-linux-%{version}.zip
-# NoSource0-md5:	7c3b522424713cc8d3814356cf092c02
+# NoSource0-md5:	a99eecba98e818b7e3b0a887e908dbe2
 Source1:	%{otnurl}/instantclient-basiclite-linux-%{version}.zip
-# NoSource1-md5:	0d5ec661d9ebfde8880cff5ca1ef9553
+# NoSource1-md5:	0a9a058a6d21edc4974b034ee10db3ee
 Source2:	%{otnurl}/instantclient-sdk-linux-%{version}.zip
-# NoSource2-md5:	e33beaaf88256e19f8c59e07d7033159
+# NoSource2-md5:	4119d59f4d45ddfea3d18412062d965e
 Source3:	%{otnurl}/instantclient-jdbc-linux-%{version}.zip
-# NoSource3-md5:	be0c52004e52448726fb7a4e891c7c98
+# NoSource3-md5:	37e29bf0a25e9cb65f9cc1dc61e882bd
 Source4:	%{otnurl}/instantclient-odbc-linux-%{version}.zip
-# NoSource4-md5:	e8ba53efe62b6f3f139a30c55baf78b5
+# NoSource4-md5:	967dd2db0e482186c89423aecbdd8e67
 Source5:	%{otnurl}/instantclient-sqlplus-linux-%{version}.zip
-# NoSource5-md5:	c3c5bfefce74974f98fd8e72fb2cd44f
+# NoSource5-md5:	95e31bfb4b7fee73134e726fe168de04
 Source6:	%{otnurl}/instantclient-tools-linux-%{version}.zip
-# NoSource6-md5:	902c817154b5568b2db8c7328d4a10d7
+# NoSource6-md5:	c70cda8ff066093961e68c2c2637b41c
 Source7:	%{otnurl}/instantclient-precomp-linux-%{version}.zip
-# NoSource7-md5:	4e99435623d82b802d4d95de3598dde7
+# NoSource7-md5:	ccde3ed7a48fc650ac10df1572cf6c88
 NoSource:	0
 NoSource:	1
 NoSource:	2
@@ -374,8 +374,10 @@ EOF
 # libocci.so: OCCI (Oracle C++ Call Interface) Library
 %attr(755,root,root) %{_libdir}/libocci.so.*
 
+%ifarch %{x8664}
 %attr(755,root,root) %{_libdir}/libipc1.so
 %attr(755,root,root) %{_libdir}/libmql1.so
+%endif
 
 # liboramysql.so: MySQL Client Library Driver for Oracle Database,
 # drop-in replacement for MySQL Commercial Connector/C 6.0 client library.
