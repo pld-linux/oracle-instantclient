@@ -42,21 +42,21 @@ NoSource:	7
 %endif
 %ifarch %{x8664}
 Source10:	%{otnurl}/instantclient-basic-linux.x64-%{version}.zip
-# NoSource10-md5:	a555a7f4510e6568e66c45238929f16b
+# NoSource10-md5:	d5ef30bc0506e0b0dae4dc20c76b8dbe
 Source11:	%{otnurl}/instantclient-basiclite-linux.x64-%{version}.zip
-# NoSource11-md5:	6c712aafb26989699d57c99a3e2bc124
+# NoSource11-md5:	3964438a216d6b9b329bad8201175b83
 Source12:	%{otnurl}/instantclient-sdk-linux.x64-%{version}.zip
-# NoSource12-md5:	e8682f754ea63b9c5f17bd22ba158a75
+# NoSource12-md5:	d5eff6654c7901d2d5bccc87e386e192
 Source13:	%{otnurl}/instantclient-jdbc-linux.x64-%{version}.zip
-# NoSource13-md5:	7b0c4111c6c4a7db062ae961dbc309b6
+# NoSource13-md5:	d3f4afd0dbf9b74c0b1e998dd69e6c9c
 Source14:	%{otnurl}/instantclient-odbc-linux.x64-%{version}.zip
-# NoSource14-md5:	b0e9e3b10ba22b34dbe335426a4fe001
+# NoSource14-md5:	30c72d4bca33084dcafe466ab1a7c399
 Source15:	%{otnurl}/instantclient-sqlplus-linux.x64-%{version}.zip
-# NoSource15-md5:	09d2463277bdbddba36aafc051c5c1b5
+# NoSource15-md5:	f165280723ff1c96f825ba62c63b65cf
 Source16:	%{otnurl}/instantclient-tools-linux.x64-%{version}.zip
-# NoSource16-md5:	95f2a981ee6515fe31652fb41f7eacbf
+# NoSource16-md5:	aff843e3748bf49cc063fa695cca9fd2
 Source17:	%{otnurl}/instantclient-precomp-linux.x64-%{version}.zip
-# NoSource17-md5:	8ac59bdbb1cb34796c753bdad65e72d9
+# NoSource17-md5:	5749c187cc9a58d55013d6a93b704688
 NoSource:	10
 NoSource:	11
 NoSource:	12
@@ -214,8 +214,8 @@ Client.
 %description sqlplus -l pl.UTF-8
 Pakiet Oracle Database Instant Client - SQL*Plus.
 
-Dodatkowe biblioteki i program do uruchamiania SQL*Plus wraz z
-Instant Clientem.
+Dodatkowe biblioteki i program do uruchamiania SQL*Plus wraz z Instant
+Clientem.
 
 %package tools
 Summary:	Oracle Database Workload Replay Client
@@ -232,8 +232,8 @@ Replay Feature.
 %description tools -l pl.UTF-8
 Pakiet Oracle Database Instant Client - WRC.
 
-WRC (Workload Replay Client) służy do odtwarzania danych dla RAT
-DB Replay.
+WRC (Workload Replay Client) służy do odtwarzania danych dla RAT DB
+Replay.
 
 %package precomp
 Summary:	Oracle Database Client - Precompiler
@@ -253,9 +253,9 @@ PRECOMP Instant Client (IC) Package contains following components:
 Pakiet PRECOMP Instant Client (IC) zawiera następujące komponenty:
 - program "proc" do prekompilacji aplikacji Pro*C
 - program "procob" do prekompilacji aplikacji Pro*COBOL
-- przykładowe pliki konfiguracyjne, programy demonstracyjne oraz
-  pliki makefile dla programów demonstracyjnych proc i procob, a
-  także dowolnych aplikacji Pro*C/Pro*COBOL
+- przykładowe pliki konfiguracyjne, programy demonstracyjne oraz pliki
+  makefile dla programów demonstracyjnych proc i procob, a także
+  dowolnych aplikacji Pro*C/Pro*COBOL
 
 %prep
 %define	__unzip unzip -n
@@ -374,6 +374,9 @@ EOF
 # libocci.so: OCCI (Oracle C++ Call Interface) Library
 %attr(755,root,root) %{_libdir}/libocci.so.*
 
+%attr(755,root,root) %{_libdir}/libipc1.so
+%attr(755,root,root) %{_libdir}/libmql1.so
+
 # liboramysql.so: MySQL Client Library Driver for Oracle Database,
 # drop-in replacement for MySQL Commercial Connector/C 6.0 client library.
 %attr(755,root,root) %{_libdir}/liboramysql%{driver_ver}.so
@@ -436,8 +439,7 @@ EOF
 
 %files odbc
 %defattr(644,root,root,755)
-%doc ODBC*.html ODBCRelnotesUS.htm
-%doc %lang(ja) ODBCRelnotesJA.htm
+%doc ODBC*.html
 %doc help_us
 %doc %lang(ja) help_ja
 %attr(755,root,root) %{_libdir}/libsqora.so.%{soname}
