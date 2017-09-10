@@ -280,11 +280,16 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/sqlplus/admin} \
 
 cp -p *.jar $RPM_BUILD_ROOT%{_javadir}
 cp -a *.so* $RPM_BUILD_ROOT%{_libdir}
-install -p sqlplus $RPM_BUILD_ROOT%{_bindir}
-install -p genezi $RPM_BUILD_ROOT%{_bindir}
 install -p adrci $RPM_BUILD_ROOT%{_bindir}
-install -p wrc $RPM_BUILD_ROOT%{_bindir}
+install -p exp $RPM_BUILD_ROOT%{_bindir}
+install -p expdp $RPM_BUILD_ROOT%{_bindir}
+install -p genezi $RPM_BUILD_ROOT%{_bindir}
+install -p imp $RPM_BUILD_ROOT%{_bindir}
+install -p impdp $RPM_BUILD_ROOT%{_bindir}
+install -p sqlldr $RPM_BUILD_ROOT%{_bindir}
+install -p sqlplus $RPM_BUILD_ROOT%{_bindir}
 install -p uidrvci $RPM_BUILD_ROOT%{_bindir}
+install -p wrc $RPM_BUILD_ROOT%{_bindir}
 cp -p glogin.sql $RPM_BUILD_ROOT%{_datadir}/sqlplus/admin
 
 %{__sed} \
@@ -466,6 +471,11 @@ EOF
 %files tools
 %defattr(644,root,root,755)
 %doc TOOLS_README
+%attr(755,root,root) %{_bindir}/exp
+%attr(755,root,root) %{_bindir}/expdp
+%attr(755,root,root) %{_bindir}/imp
+%attr(755,root,root) %{_bindir}/impdp
+%attr(755,root,root) %{_bindir}/sqlldr
 %attr(755,root,root) %{_bindir}/wrc
 %attr(755,root,root) %{_libdir}/libnfsodm12.so
 
