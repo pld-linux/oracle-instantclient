@@ -6,31 +6,31 @@
 # http://www.oracle.com/technetwork/topics/linuxpower-101193.html (ppc - v10.2.0.5)
 # http://www.oracle.com/technetwork/topics/linuxpower64-092516.html (ppc64 - v10.2.0.5)
 
-%define		otnurl	http://download.oracle.com/otn/linux/instantclient/121020
+%define		otnurl	https://edelivery.oracle.com/akam/otn/linux/instantclient/122010
 Summary:	Oracle Database Instant Client
 Summary(pl.UTF-8):	Oracle Database Instant Client - klient bazy danych Oracle
 Name:		oracle-instantclient
-Version:	12.1.0.2.0
+Version:	12.2.0.1.0
 Release:	1
 License:	OTN (proprietary, non-distributable)
 Group:		Applications/Databases
 %ifarch %{ix86}
 Source0:	%{otnurl}/instantclient-basic-linux-%{version}.zip
-# NoSource0-md5:	a99eecba98e818b7e3b0a887e908dbe2
+# NoSource0-md5:	afc84c453dd143d6138baa1faf3e3a52
 Source1:	%{otnurl}/instantclient-basiclite-linux-%{version}.zip
-# NoSource1-md5:	0a9a058a6d21edc4974b034ee10db3ee
+# NoSource1-md5:	dc493bcf009b371f302f8360b275bad0
 Source2:	%{otnurl}/instantclient-sdk-linux-%{version}.zip
-# NoSource2-md5:	4119d59f4d45ddfea3d18412062d965e
+# NoSource2-md5:	a53172101846638c9e8c32af63991130
 Source3:	%{otnurl}/instantclient-jdbc-linux-%{version}.zip
-# NoSource3-md5:	37e29bf0a25e9cb65f9cc1dc61e882bd
+# NoSource3-md5:	24df104cc59254ab4928d4eb3a19cbd3
 Source4:	%{otnurl}/instantclient-odbc-linux-%{version}.zip
-# NoSource4-md5:	967dd2db0e482186c89423aecbdd8e67
+# NoSource4-md5:	6be26ef53189faa8a622fd0a80bb7473
 Source5:	%{otnurl}/instantclient-sqlplus-linux-%{version}.zip
-# NoSource5-md5:	95e31bfb4b7fee73134e726fe168de04
+# NoSource5-md5:	3c9a3ec6172f620a065ee8bc68c408bf
 Source6:	%{otnurl}/instantclient-tools-linux-%{version}.zip
-# NoSource6-md5:	c70cda8ff066093961e68c2c2637b41c
+# NoSource6-md5:	d00f4a31ed12cf19eb38c8ce37b6e772
 Source7:	%{otnurl}/instantclient-precomp-linux-%{version}.zip
-# NoSource7-md5:	ccde3ed7a48fc650ac10df1572cf6c88
+# NoSource7-md5:	0e70ac53b10da7f137be01e99d9c8de3
 NoSource:	0
 NoSource:	1
 NoSource:	2
@@ -42,21 +42,21 @@ NoSource:	7
 %endif
 %ifarch %{x8664}
 Source10:	%{otnurl}/instantclient-basic-linux.x64-%{version}.zip
-# NoSource10-md5:	d5ef30bc0506e0b0dae4dc20c76b8dbe
+# NoSource10-md5:	d9639092e3dea2e023272e52e2bd42da
 Source11:	%{otnurl}/instantclient-basiclite-linux.x64-%{version}.zip
-# NoSource11-md5:	3964438a216d6b9b329bad8201175b83
+# NoSource11-md5:	b024039f518975f5a5b6473130c74e43
 Source12:	%{otnurl}/instantclient-sdk-linux.x64-%{version}.zip
-# NoSource12-md5:	d5eff6654c7901d2d5bccc87e386e192
+# NoSource12-md5:	077fa2f215185377ccb670de9ca1678f
 Source13:	%{otnurl}/instantclient-jdbc-linux.x64-%{version}.zip
-# NoSource13-md5:	d3f4afd0dbf9b74c0b1e998dd69e6c9c
+# NoSource13-md5:	3e6cdc6686b44160a8a5e4af0cacf5fd
 Source14:	%{otnurl}/instantclient-odbc-linux.x64-%{version}.zip
-# NoSource14-md5:	30c72d4bca33084dcafe466ab1a7c399
+# NoSource14-md5:	a047b8e637624b76b80d07fd8a9f1baf
 Source15:	%{otnurl}/instantclient-sqlplus-linux.x64-%{version}.zip
-# NoSource15-md5:	f165280723ff1c96f825ba62c63b65cf
+# NoSource15-md5:	93ae87df1d08bb31da57443a416edc8c
 Source16:	%{otnurl}/instantclient-tools-linux.x64-%{version}.zip
-# NoSource16-md5:	aff843e3748bf49cc063fa695cca9fd2
+# NoSource16-md5:	5e258c34f947c31f0cf0e6322da8fe2c
 Source17:	%{otnurl}/instantclient-precomp-linux.x64-%{version}.zip
-# NoSource17-md5:	5749c187cc9a58d55013d6a93b704688
+# NoSource17-md5:	30e571eff9003522d13bde4298461476
 NoSource:	10
 NoSource:	11
 NoSource:	12

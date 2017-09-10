@@ -46,7 +46,10 @@ Press Ctrl-C to Decline License Agreement
 EOF
 read license
 
-urls=$(builder -su *.spec --target $arch | grep http://)
+urls=$(builder -su *.spec --target $arch | grep https://)
+# TODO: obtain OHS-edelivery.oracle.com-443 cookie value
+ohs_token=${OHS_TOKEN:-'XXXX~'}
 for url in $urls; do
-	wget -c --header "Cookie: oraclelicense=$cookie; gpw_e24=$refurl" "$url"
+	wget -c "$url" \
+		--header "Cookie: oraclelicense=$cookie; gpw_e24=$refurl; OHS-edelivery.oracle.com-443=$ohs_token;"
 done
