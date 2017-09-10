@@ -271,6 +271,14 @@ mv instantclient_*/* .
 
 mv help/us help_us
 mv help/ja help_ja
+chmod a-x *.html *.sql odbc_update_ini.sh
+
+# simplify file structure
+# this allows catch new binaries easily
+install -d lib bin
+mv *.so* lib
+set -- $(find -maxdepth 1 -type f -perm /1)
+mv "$@" bin
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -279,17 +287,8 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/sqlplus/admin} \
 	$RPM_BUILD_ROOT{%{_pkgconfigdir},%{_javadir},%{_sysconfdir}}
 
 cp -p *.jar $RPM_BUILD_ROOT%{_javadir}
-cp -a *.so* $RPM_BUILD_ROOT%{_libdir}
-install -p adrci $RPM_BUILD_ROOT%{_bindir}
-install -p exp $RPM_BUILD_ROOT%{_bindir}
-install -p expdp $RPM_BUILD_ROOT%{_bindir}
-install -p genezi $RPM_BUILD_ROOT%{_bindir}
-install -p imp $RPM_BUILD_ROOT%{_bindir}
-install -p impdp $RPM_BUILD_ROOT%{_bindir}
-install -p sqlldr $RPM_BUILD_ROOT%{_bindir}
-install -p sqlplus $RPM_BUILD_ROOT%{_bindir}
-install -p uidrvci $RPM_BUILD_ROOT%{_bindir}
-install -p wrc $RPM_BUILD_ROOT%{_bindir}
+cp -a lib/* $RPM_BUILD_ROOT%{_libdir}
+install -p bin/* $RPM_BUILD_ROOT%{_bindir}
 cp -p glogin.sql $RPM_BUILD_ROOT%{_datadir}/sqlplus/admin
 
 %{__sed} \
