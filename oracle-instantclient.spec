@@ -81,7 +81,7 @@ ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		driver_ver	%(echo %{version} | cut -d. -f1)
-%define		soname		%(echo %{version} | cut -d. -f1,2)
+%define		soname		12.1
 
 # verify these with odbc_update_ini.sh
 %define		driver_name	"Oracle %{driver_ver}c ODBC driver"
