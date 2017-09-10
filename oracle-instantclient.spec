@@ -429,8 +429,7 @@ EOF
 %attr(755,root,root) %{_libdir}/libheteroxa%{driver_ver}.so
 # libocijdbc12.so: OCI Instant Client JDBC Library
 %attr(755,root,root) %{_libdir}/libocijdbc%{driver_ver}.so
-%{_javadir}/ojdbc6.jar
-%{_javadir}/ojdbc7.jar
+%{_javadir}/ojdbc8.jar
 %{_javadir}/orai18n-mapping.jar
 %{_javadir}/orai18n.jar
 %{_javadir}/xstreams.jar
