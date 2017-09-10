@@ -287,13 +287,15 @@ install -p wrc $RPM_BUILD_ROOT%{_bindir}
 install -p uidrvci $RPM_BUILD_ROOT%{_bindir}
 cp -p glogin.sql $RPM_BUILD_ROOT%{_datadir}/sqlplus/admin
 
-%{__sed} -e 's|@@prefix@@|%{_prefix}|' \
+%{__sed} \
+	-e 's|@@prefix@@|%{_prefix}|' \
 	-e 's|@@libdir@@|%{_libdir}|' \
 	-e 's|@@includedir@@|%{_includedir}/oracle/client|' \
 	-e 's|@@version@@|%{version}|' %{SOURCE20} > \
 		$RPM_BUILD_ROOT%{_bindir}/oracle-instantclient-config
 
-%{__sed} -e 's|@@prefix@@|%{_prefix}|' \
+%{__sed} \
+	-e 's|@@prefix@@|%{_prefix}|' \
 	-e 's|@@libdir@@|%{_libdir}|' \
 	-e 's|@@includedir@@|%{_includedir}/oracle/client|' \
 	-e 's|@@version@@|%{version}|' %{SOURCE21} > \
@@ -337,6 +339,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n java-jdbc-%{name} -p /sbin/ldconfig
 %postun	-n java-jdbc-%{name} -p /sbin/ldconfig
+
+%post	tools -p /sbin/ldconfig
+%postun	tools -p /sbin/ldconfig
 
 %post	sqlplus -p /sbin/ldconfig
 %postun	sqlplus -p /sbin/ldconfig
@@ -462,6 +467,7 @@ EOF
 %defattr(644,root,root,755)
 %doc TOOLS_README
 %attr(755,root,root) %{_bindir}/wrc
+%attr(755,root,root) %{_libdir}/libnfsodm12.so
 
 %files precomp
 %defattr(644,root,root,755)
